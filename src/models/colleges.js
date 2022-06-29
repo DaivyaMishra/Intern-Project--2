@@ -4,7 +4,7 @@ const objectId = mongoose.Schema.Types.ObjectId
 const userSchema = new mongoose.Schema( {  
     name: { type: String, 
 		    unique: true,
-			required: true },
+			required: true }, 
 	fullName: { type: String, 
 		        unique: true,
 				required: true },
@@ -13,12 +13,13 @@ const userSchema = new mongoose.Schema( {
 			     unique: true},
 	isDeleted: {type: Boolean, 
 	             default: false},
-	interns: [{ type: objectId,
-	           ref: 'colleges'}]
-
 
 
 }, { timestamps: true });
 
 
 module.exports = mongoose.model('colleges', userSchema)
+
+
+
+

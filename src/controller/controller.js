@@ -28,7 +28,8 @@ const createIntern =  async function (req, res) {
 
 
 const allInters = async function(req, res){ 
-    let data = await Interns.find({})
+    let data = await Interns.find().populate('CollegeId')
+
 
     res.send(data)
 }
@@ -52,11 +53,19 @@ const collegeList = async function(req, res){
 
 }
 
+const filterByClg = async function(req, res){
+    let clg = req.query.name
+    let data = await Colleges.findOne({name: clg, isDeleted: false})
+    let students = await Interns.find({collegeId: data._id})
+    console.log(students)
+    data["interns"] = students
+    res.status(201).send({status: true, data: data})
+}
+
 
 
 module.exports.createCollege = createCollege
 module.exports.allInters = allInters
-
+module.exports.filterByClg = filterByClg
 module.exports.collegeList = collegeList
-
 module.exports.createIntern  = createIntern 

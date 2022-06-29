@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-mongoose.connect("mongodb+srv://ddutta706:Kp9AhM76EvHSQyYk@cluster0.levfaad.mongodb.net/college-Intern", {
+mongoose.connect("mongodb+srv://DaivyaMishra:YomJ4NmVOzwwYYD6@cluster0.k25widm.mongodb.net/group31-Database", {
     useNewUrlParser: true
 }).then(() => console.log("mongdb conection succsesfull"))
 .catch(err => console.log(err))

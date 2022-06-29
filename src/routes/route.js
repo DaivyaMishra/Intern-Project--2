@@ -13,8 +13,8 @@ router.post("/functionup/interns", ucontroller.createIntern)
 
 router.get("/college-list", ucontroller.collegeList)
 
-//router.get("/interlist/:clgId", ucontroller.createPublisher)
-
+router.get("/interlist", ucontroller.allInters)
+router.get("/filterByClg", ucontroller.filterByClg)
 
 
 
