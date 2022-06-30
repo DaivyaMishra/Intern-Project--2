@@ -10,7 +10,8 @@ const bookSchema = new mongoose.Schema( {
               required: true,
                 },
     CollegeId: { type: objectId,
-                  ref: "colleges" },
+                  ref: "colleges",
+                  required: true },
     isDeleted: {type: Boolean, default: false}
 
 }, { timestamps: true });
