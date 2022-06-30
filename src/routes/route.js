@@ -10,14 +10,14 @@ const router = express.Router();
 
 router.post('/functionup/colleges', ucontroller.createCollege)
 
-router.post("/functionup/interns",middle.validator1, ucontroller.createIntern)
+router.post("/functionup/interns", middle.validator1, ucontroller.createIntern)
 
-router.get("/college-list", ucontroller.collegeList)
-
-router.get("/interlist", ucontroller.allInters)
 router.get("/collegeDetails", ucontroller.collegeDetails)
 
 
+//router.get("/college-list", ucontroller.collegeList)
+
+//router.get("/interlist", ucontroller.allInters)
 
 
 
