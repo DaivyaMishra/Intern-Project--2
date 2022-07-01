@@ -8,16 +8,14 @@ const isvalidkey = function(body){
 
 var validateEmail = function(email) {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
     return re.test(email)
 };
+
 const isString = function(str){
     return typeof(str)=="string"
 }
 
-
 ////////////////////////////////////////////////////////////////////////////
-
 
 const validator1 = async function(req, res, next){
     try {
@@ -26,34 +24,30 @@ const validator1 = async function(req, res, next){
       if(!isvalidkey(data)) throw {status: false, err: "Check every keys"}
 
       for(i of strFields){
+          if(!data[i])  throw {status: false, err: i + " " + " is required"}
           if(!(isString(data[i]))) throw {status: false, err: "PLEASE ENTER STRING AT" + " " + i}
       }
       if(!validateEmail(data["email"])) throw {status: false, err: "PLEASE ENTER A RIGHT EMAIL"}
-      
-      let isValid = await colleges.findOne({CollegeId: data.CollegeId})
-      if(!isValid) throw { status: false, err: "COLLEGE ID IS NOT VALID"}
 
+    //   if(!data.name) throw {status: false, err: "Name is required"}
+    //   if(!data.email) throw {status: false, err: "Email is required"}
+    //   if(!data.mobile) throw {status: false, err: "Mobile is required"}
 
+      let isValid = await colleges.findOne({name: data.CollegeName})
+      if(!isValid) throw { status: false, err: "COLLEGE NAME IS NOT VALID"}
+      if(!(data.mobile.length > 0)) throw {status: false, err: "Mobile is required"}
 
      /////////////email varification////////////
-
-    
-
-  // checking for the duplicate mail ID
-
-  let mail = await Interns.findOne({ email: data.email });
-  if (mail) throw { status: false, msg: "Mail Id is already exist" };
-
-
+     ////checking for the duplicate mail ID/////
+    let mail = await Interns.findOne({ email: data.email });
+    if (mail) throw { status: false, msg: "Mail Id is already exist" };
      /////////////mobile number validation///////
-
-    const isMobileAlreadyUsed = await Interns.findOne({ mobile: data.mobile });
-    // console.log(isMobileAlreadyUsed)
-    if (isMobileAlreadyUsed) throw { status: false, msg: ` this Mobile is already registered` }
+     if (!data.mobile.trim().match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) throw {status: false, err: "PLease enter a Correct Mobile Number"}
+     const isMobileAlreadyUsed = await Interns.findOne({ mobile: data.mobile });
+       // console.log(isMobileAlreadyUsed)
+    if (isMobileAlreadyUsed) throw { status: false, msg: `this Mobile is already registered`}
 
  
-
-
 ///////////////////////////////
 
          next()

@@ -4,14 +4,15 @@ const objectId = mongoose.Schema.Types.ObjectId
 const userSchema = new mongoose.Schema( {  
     name: { type: String, 
 		    unique: true,
-			required: true }, 
+			required: true,
+		    trim: true }, 
 	fullName: { type: String, 
-		        unique: true,
+		        trim: true,
 				required: true,
 			    },
 	logoLink: { type: String,
 	            required: true,
-			     unique: true},
+			     },
 	isDeleted: {type: Boolean, 
 	             default: false},
 
